@@ -33,13 +33,16 @@ function createOptions(wrapper) {
   var _purple = document.createElement("div");
   _purple.className = "purple";
   var _cyan = document.createElement("div");
-  _cyan.className = "purple";
+  _cyan.className = "cyan";
   var _gray = document.createElement("div");
   _gray.className = "gray";
   var _black = document.createElement("div");
   _black.className = "black";
   var _more = document.createElement("more");
+
   _more.className = "more";
+  _more.style.display = "flex";
+  _more.style.flexDirection = "column";
   //================================================
   var _note_list = document.createElement("div");
   _note_list.className = "note-list-icon";
@@ -52,7 +55,17 @@ function createOptions(wrapper) {
   _span_icon.appendChild(_list_icon);
   _note_list.appendChild(_span_icon);
   _note_list.appendChild(_span_list);
-
+  // close
+  var _close = document.createElement("div");
+  _close.className = "close";
+  _close.style.cssFloat = "left";
+  var _close_icon = document.createElement("i");
+  //close options button
+  _close.onclick = function() {
+    _options.classList.remove("open");
+  };
+  _close_icon.className = "fa fa-times";
+  _close.appendChild(_close_icon);
   //==================================================
   var _delete_note = document.createElement("div");
   _delete_note.className = "delete-note";
@@ -67,8 +80,12 @@ function createOptions(wrapper) {
   _delete_note.appendChild(_span_delete_icon);
   _span_delete_icon.appendChild(_trash_icon);
   _delete_note.appendChild(_span_delete);
+
+  //================================
   _more.appendChild(_note_list);
   _more.appendChild(_delete_note);
+  _more.appendChild(_close);
+  //================================
   _colors.appendChild(_yellow);
   _colors.appendChild(_green);
   _colors.appendChild(_pink);
@@ -94,7 +111,15 @@ function buildNoteElement(wrapper) {
   var _times_icon = document.createElement("i");
   var _plus_icon = document.createElement("i");
   _plus_icon.className = "fa fa-plus";
+  _plus.onclick = function() {
+    console.log("hello");
+    // createNewNote();
+  };
   _ellipsis_icon.className = "fa fa-ellipsis-h";
+  //open options button
+  _ellipsis_icon.onclick = function() {
+    wrapper.children[0].classList.add("open");
+  };
   _times_icon.className = "fa fa-times";
   _container.className = "container";
   _header.className = "header";
@@ -115,10 +140,11 @@ function buildNoteElement(wrapper) {
 
   _note.appendChild(_textarea);
   _container.appendChild(_note);
-  createOptions(_container);
+
   footerElement(_container);
   wrapper.appendChild(_container);
 }
+//open options
 function footerElement(container) {
   var _footer = document.createElement("div");
   _footer.className = "footer";
@@ -164,11 +190,15 @@ function footerElement(container) {
 }
 function createNewNote() {
   var newWrapper = document.createElement("div");
+  createOptions(newWrapper);
   styleDivWrapper(newWrapper);
   buildNoteElement(newWrapper);
   // newWrapper.innerHTML = html;
   document.body.appendChild(newWrapper);
-  var dragItem = document.querySelector(".plus");
+  customeDrag(newWrapper);
+}
+
+function customeDrag(wrapper) {
   var active = false;
   var currentX, currentY, initialX, initialY;
   var xOffset = 0;
@@ -176,14 +206,45 @@ function createNewNote() {
   function dragStart(e) {
     initialX = e.clientX - xOffset;
     initialY = e.clientY - yOffset;
-    if (e.target === dragItem) {
-      console.log("hello");
+    //wrapper
+    if (wrapper.children[1]) {
+      console.log("yea");
+      active = true;
     }
-    console.log(e.target);
+
+    // console.log(e.target);
+    // console.log(wrapper.children[1].parentNode.firstChild);
   }
-  newWrapper.addEventListener("mousedown", dragStart, false);
-  // newWrapper.addEventListener("mouseup", dragEnd, false);
-  // newWrapper.addEventListener("mousemove", drag, false);
+
+  function dragEnd(e) {
+    initialX = currentX;
+    initialY = currentY;
+    active = false;
+  }
+  function drag(e) {
+    if (active) {
+      e.preventDefault();
+      currentX = e.clientX - initialX;
+      currentY = e.clientY - initialY;
+      xOffset = currentX;
+      yOffset = currentY;
+      setTranslate(currentX, currentY, wrapper.children[1]);
+    }
+  }
+  function setTranslate(xPos, yPos, el) {
+    el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    if (el.parentNode.firstChild.className == "options") {
+      el.parentNode.firstChild.style.transform =
+        "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    } else {
+      el.parentNode.children[0].style.transform =
+        "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+      // console.log(el.parentNode.children[0]);
+    }
+  }
+  wrapper.addEventListener("mousedown", dragStart, false);
+  wrapper.addEventListener("mouseup", dragEnd, false);
+  wrapper.addEventListener("mousemove", drag, false);
 }
 
 function generateLeftPosition() {
@@ -203,31 +264,32 @@ function styleDivWrapper(wrapper) {
 }
 
 // make draggable
-window.onload = addListeners;
+customeDrag(document.querySelector(".wrapper"));
+// window.onload = addListeners;
 
-function addListeners() {
-  document
-    .querySelector(".container")
-    .addEventListener("mousedown", mouseDown, false);
-  window.addEventListener("mouseup", mouseUp, false);
-}
+// function addListeners() {
+//   document
+//     .querySelector(".container")
+//     .addEventListener("mousedown", mouseDown, false);
+//   window.addEventListener("mouseup", mouseUp, false);
+// }
 
-function mouseUp() {
-  window.removeEventListener("mousemove", dragNote, true);
-}
+// function mouseUp() {
+//   window.removeEventListener("mousemove", dragNote, true);
+// }
 
-function mouseDown() {
-  window.addEventListener("mousemove", dragNote, true);
-}
+// function mouseDown() {
+//   window.addEventListener("mousemove", dragNote, true);
+// }
 
-function dragNote(e) {
-  var div = document.querySelector(".container");
-  var newWrapper = document.querySelector(".new-wrapper");
+// function dragNote(e) {
+//   var div = document.querySelector(".container");
+//   var newWrapper = document.querySelector(".new-wrapper");
 
-  div.style.position = "absolute";
-  div.style.top = e.clientY + "px";
-  div.style.left = e.clientX + "px";
-  options.style.position = "absolute";
-  options.style.top = e.clientY + "px";
-  options.style.left = e.clientX + "px";
-}
+//   div.style.position = "absolute";
+//   div.style.top = e.clientY + "px";
+//   div.style.left = e.clientX + "px";
+//   options.style.position = "absolute";
+//   options.style.top = e.clientY + "px";
+//   options.style.left = e.clientX + "px";
+// }
