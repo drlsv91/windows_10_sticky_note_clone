@@ -265,31 +265,3 @@ function styleDivWrapper(wrapper) {
 
 // make draggable
 customeDrag(document.querySelector(".wrapper"));
-// window.onload = addListeners;
-
-// function addListeners() {
-//   document
-//     .querySelector(".container")
-//     .addEventListener("mousedown", mouseDown, false);
-//   window.addEventListener("mouseup", mouseUp, false);
-// }
-
-// function mouseUp() {
-//   window.removeEventListener("mousemove", dragNote, true);
-// }
-
-// function mouseDown() {
-//   window.addEventListener("mousemove", dragNote, true);
-// }
-
-// function dragNote(e) {
-//   var div = document.querySelector(".container");
-//   var newWrapper = document.querySelector(".new-wrapper");
-
-//   div.style.position = "absolute";
-//   div.style.top = e.clientY + "px";
-//   div.style.left = e.clientX + "px";
-//   options.style.position = "absolute";
-//   options.style.top = e.clientY + "px";
-//   options.style.left = e.clientX + "px";
-// }
