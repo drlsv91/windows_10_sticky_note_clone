@@ -1,0 +1,121 @@
+.wrapper{
+    position: absolute;
+}
+.container{
+    border: .5px solid black;
+    justify-content: center;
+    /* max-width: 228px; */
+    display: inline-flex;
+    flex-direction: column;
+    background-color: #fff2ab;
+    box-shadow: 2px 2px 4px #4b4b4e66;
+}
+.header{
+    display: flex;
+    padding: 10px;
+    
+}
+*:focus{
+    outline: none;
+}
+.header > *{
+    flex: 1;
+    color: darkslategrey;
+}
+.plus{
+    margin-left: 5px;
+    flex: 10;
+}
+.footer{
+    display: flex;
+    margin-top: 10rem;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+.footer span{
+    display: block;
+}
+.footer > *{
+    flex: 1;
+    color: darkslategrey;
+}
+.bold{
+    margin-left: 5px;
+}
+textarea{
+    border: none;
+    resize: none;
+    background: transparent;
+}
+.options{
+    width: inherit;
+    position: absolute;
+    width: 371px;
+    
+    -webkit-box-shadow: 3px 3px 5px 2px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    3px 3px 5px 2px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         3px 3px 5px 2px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  transition-property: all;
+  transition-duration: .8s;
+  transition-timing-function: cubic-bezier(0,1,0.5,1);
+    transform: translateY(-120%)
+}
+.options.open{
+    transform: translateY(0%)
+}
+.close{
+    float: right;
+    cursor: pointer;
+}
+.colors{
+   
+    display: flex;
+}
+.colors >*{
+    width: 40px;
+    height: 50px;
+    flex: 1;
+}
+.yellow{
+    background-color:  yellow;
+}
+.green{
+    background-color:  lightgreen;
+}
+.pink{
+    background-color:  pink;
+}
+.purple{
+    background-color:  #e8bce8f7;
+}
+.cyan{
+    background-color:  #b0f5f5;
+}
+.gray{
+    background-color:  #e2dfdf;
+}
+.black{
+    background-color:  #807c7c;
+}
+.more{
+    background-color: #fff;
+    padding: 20px;
+}
+.note-list-icon{
+   
+    padding: 10px 0 10px 0;
+}
+.delete-note{
+   
+    padding: 10px 0 10px 0;
+}
+.note-label{
+    margin-left: 1rem;
+}
+.delete-label{
+    margin-left: 1rem;
+    color: red;
+}
+.fa-trash-o{
+    color: red;
+}
