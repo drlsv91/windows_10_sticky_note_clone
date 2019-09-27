@@ -58,10 +58,11 @@ textarea{
   transition-property: all;
   transition-duration: .8s;
   transition-timing-function: cubic-bezier(0,1,0.5,1);
-    transform: translateY(-120%)
+    display: none;
 }
 .options.open{
-    transform: translateY(0%)
+    display: block;
+    z-index: 1;
 }
 .close{
     float: right;
