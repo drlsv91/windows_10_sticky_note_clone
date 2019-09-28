@@ -60,6 +60,29 @@ function createOptions(wrapper) {
   _close.className = "close";
   _close.style.cssFloat = "left";
   var _close_icon = document.createElement("i");
+  //colors function
+  let allTarget = [];
+  _colors.onclick = function(e) {
+    if (!allTarget.includes(e.target)) {
+      allTarget.push(e.target);
+    }
+
+    if (allTarget.length) {
+      allTarget.forEach(color => {
+        if (color.className === e.target.className) {
+          let check_icon = document.createElement("i");
+          check_icon.style.marginTop = "15px";
+          check_icon.className = "fa fa-check";
+          e.target.appendChild(check_icon);
+          e.target.style.textAlign = "center";
+        } else {
+          color.textContent = "";
+        }
+      });
+    }
+
+    console.log(allTarget, e.target);
+  };
   //close options button
   _close.onclick = function() {
     _options.classList.remove("open");
@@ -120,6 +143,7 @@ function buildNoteElement(wrapper) {
   _ellipsis_icon.onclick = function() {
     wrapper.children[0].classList.add("open");
   };
+
   // delete note
   _times_icon.className = "fa fa-times";
   _times_icon.onclick = function() {
