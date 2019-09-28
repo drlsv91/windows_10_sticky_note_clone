@@ -59,7 +59,7 @@ function createOptions(wrapper) {
   var _black = document.createElement("div");
   _black.className = "black";
   _black.style.backgroundColor = "#36454f";
-  var _more = document.createElement("more");
+  var _more = document.createElement("div");
 
   _more.className = "more";
   _more.style.display = "flex";
