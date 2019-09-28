@@ -208,7 +208,7 @@ function customeDrag(wrapper) {
     initialY = e.clientY - yOffset;
     //wrapper
     if (wrapper.children[1]) {
-      console.log("yea");
+      // console.log(wrapper.children[1]);
       active = true;
     }
 
@@ -232,14 +232,15 @@ function customeDrag(wrapper) {
     }
   }
   function setTranslate(xPos, yPos, el) {
-    el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
     if (el.parentNode.firstChild.className == "options") {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+      // console.log(el.parentNode);
       el.parentNode.firstChild.style.transform =
         "translate3d(" + xPos + "px, " + yPos + "px, 0)";
-    } else {
+    } else if ((el.parentNode.children[0].className = "options")) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
       el.parentNode.children[0].style.transform =
         "translate3d(" + xPos + "px, " + yPos + "px, 0)";
-      // console.log(el.parentNode.children[0]);
     }
   }
   wrapper.addEventListener("mousedown", dragStart, false);
