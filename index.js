@@ -111,9 +111,8 @@ function buildNoteElement(wrapper) {
   var _times_icon = document.createElement("i");
   var _plus_icon = document.createElement("i");
   _plus_icon.className = "fa fa-plus";
-  _plus.onclick = function() {
-    console.log("hello");
-    // createNewNote();
+  _plus_icon.onclick = function() {
+    createNewNote();
   };
   _ellipsis_icon.className = "fa fa-ellipsis-h";
   //open options button
