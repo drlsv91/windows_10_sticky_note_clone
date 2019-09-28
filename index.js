@@ -111,6 +111,7 @@ function buildNoteElement(wrapper) {
   var _times_icon = document.createElement("i");
   var _plus_icon = document.createElement("i");
   _plus_icon.className = "fa fa-plus";
+  // add more note
   _plus_icon.onclick = function() {
     createNewNote();
   };
@@ -119,7 +120,14 @@ function buildNoteElement(wrapper) {
   _ellipsis_icon.onclick = function() {
     wrapper.children[0].classList.add("open");
   };
+  // delete note
   _times_icon.className = "fa fa-times";
+  _times_icon.onclick = function() {
+    var parentNode = document.getElementsByTagName("body")[0];
+    var childElement = this.parentNode.parentNode.parentNode.parentNode;
+    parentNode.removeChild(childElement);
+    // console.log(parentNode);
+  };
   _container.className = "container";
   _header.className = "header";
   _plus.appendChild(_plus_icon);
