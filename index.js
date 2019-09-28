@@ -16,9 +16,23 @@ document.querySelector(".close").addEventListener("click", function() {
 });
 
 headerIcons.addEventListener("click", headFunction);
+let originAllTarget = [];
+function moreOptionsFun() {
+  var option = document.querySelector(".options");
+  option.addEventListener("click", function(e) {
+    // console.log(e.target);
+    if (!originAllTarget.includes(e.target)) {
+      originAllTarget.push(e.target);
+    }
+    //refactor this
+    moreOption(originAllTarget, e);
+    option.classList.remove("open");
+    // console.log(originAllTarget);
+  });
+}
+moreOptionsFun();
 
 // Add sticky note
-
 function createOptions(wrapper) {
   var _options = document.createElement("div");
   _options.className = "options";
@@ -26,7 +40,7 @@ function createOptions(wrapper) {
   _colors.className = "colors";
   var _yellow = document.createElement("div");
   _yellow.className = "yellow";
-  _yellow.style.backgroundColor = "yellow";
+  _yellow.style.backgroundColor = "#fff2ab";
   var _green = document.createElement("div");
   _green.className = "green";
   _green.style.backgroundColor = "lightgreen";
@@ -68,49 +82,20 @@ function createOptions(wrapper) {
   _close.style.cssFloat = "left";
   var _close_icon = document.createElement("i");
   //colors function
+
+  //========================================
   let allTarget = [];
   _colors.onclick = function(e) {
     if (!allTarget.includes(e.target)) {
       allTarget.push(e.target);
     }
     // _close.childNodes
-    if (allTarget.length) {
-      allTarget.forEach(color => {
-        if (color.className === e.target.className) {
-          let check_icon = document.createElement("i");
-          check_icon.style.marginTop = "15px";
-          check_icon.className = "fa fa-check";
-          e.target.appendChild(check_icon);
-          e.target.style.textAlign = "center";
-          var parentNode = e.target.parentNode.parentNode.parentNode;
-          // if(parentNode.children.)
-          // parentNode.children[1].classList.add(color.className);
-          parentNode.children[1].style.backgroundColor =
-            color.style.backgroundColor;
-          if (color.style.backgroundColor === "rgb(54, 69, 79)") {
-            Array.from(parentNode.children[1].children).forEach(elem => {
-              Array.from(elem.children).forEach(child => {
-                child.style.color = "#fff";
-                console.log(child.style);
-              });
-            });
-            console.log("yes");
-          } else {
-            Array.from(parentNode.children[1].children).forEach(elem => {
-              Array.from(elem.children).forEach(child => {
-                child.style.color = "black";
-                console.log(child.style);
-              });
-            });
-          }
-        } else {
-          color.textContent = "";
-        }
-      });
-    }
+    moreOption(allTarget, e);
     _options.classList.remove("open");
     // console.log(allTarget, e.target);
   };
+
+  //====================================================
   //close options button
   _close.onclick = function() {
     _options.classList.remove("open");
@@ -147,6 +132,46 @@ function createOptions(wrapper) {
   _options.appendChild(_colors);
   _options.appendChild(_more);
   wrapper.appendChild(_options);
+}
+
+// function for more option toggle
+function moreOption(originAllTarget, e) {
+  if (originAllTarget.length) {
+    originAllTarget.forEach(color => {
+      if (color.className === e.target.className) {
+        let check_icon = document.createElement("i");
+        check_icon.style.marginTop = "15px";
+        check_icon.className = "fa fa-check";
+        e.target.appendChild(check_icon);
+        e.target.style.textAlign = "center";
+        var parentNode = e.target.parentNode.parentNode.parentNode;
+        // if(parentNode.children.)
+        // parentNode.children[1].classList.add(color.className);
+        parentNode.children[1].style.backgroundColor =
+          color.style.backgroundColor;
+        if (color.style.backgroundColor === "rgb(54, 69, 79)") {
+          Array.from(parentNode.children[1].children).forEach(elem => {
+            Array.from(elem.children).forEach(child => {
+              child.style.color = "#fff";
+              check_icon.style.color = "#fff";
+              console.log(child.style);
+            });
+          });
+          console.log("yes");
+        } else {
+          Array.from(parentNode.children[1].children).forEach(elem => {
+            Array.from(elem.children).forEach(child => {
+              child.style.color = "black";
+              check_icon.style.color = "black";
+              // console.log(child.style);
+            });
+          });
+        }
+      } else {
+        color.textContent = "";
+      }
+    });
+  }
 }
 
 function buildNoteElement(wrapper) {
@@ -193,6 +218,7 @@ function buildNoteElement(wrapper) {
 
   var _note = document.createElement("div");
   _note.className = "note";
+  //textarea ===================//
   var _textarea = document.createElement("textarea");
   _textarea.placeholder = "Take a note";
   _textarea.cols = "50";
