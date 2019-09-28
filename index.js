@@ -26,18 +26,25 @@ function createOptions(wrapper) {
   _colors.className = "colors";
   var _yellow = document.createElement("div");
   _yellow.className = "yellow";
+  _yellow.style.backgroundColor = "yellow";
   var _green = document.createElement("div");
   _green.className = "green";
+  _green.style.backgroundColor = "lightgreen";
   var _pink = document.createElement("div");
   _pink.className = "pink";
+  _pink.style.backgroundColor = "pink";
   var _purple = document.createElement("div");
   _purple.className = "purple";
+  _purple.style.backgroundColor = "#e8bce8f7";
   var _cyan = document.createElement("div");
   _cyan.className = "cyan";
+  _cyan.style.backgroundColor = "#b0f5f5";
   var _gray = document.createElement("div");
   _gray.className = "gray";
+  _gray.style.backgroundColor = "#e2dfdf";
   var _black = document.createElement("div");
   _black.className = "black";
+  _black.style.backgroundColor = "#36454f";
   var _more = document.createElement("more");
 
   _more.className = "more";
@@ -66,7 +73,7 @@ function createOptions(wrapper) {
     if (!allTarget.includes(e.target)) {
       allTarget.push(e.target);
     }
-
+    // _close.childNodes
     if (allTarget.length) {
       allTarget.forEach(color => {
         if (color.className === e.target.className) {
@@ -75,13 +82,34 @@ function createOptions(wrapper) {
           check_icon.className = "fa fa-check";
           e.target.appendChild(check_icon);
           e.target.style.textAlign = "center";
+          var parentNode = e.target.parentNode.parentNode.parentNode;
+          // if(parentNode.children.)
+          // parentNode.children[1].classList.add(color.className);
+          parentNode.children[1].style.backgroundColor =
+            color.style.backgroundColor;
+          if (color.style.backgroundColor === "rgb(54, 69, 79)") {
+            Array.from(parentNode.children[1].children).forEach(elem => {
+              Array.from(elem.children).forEach(child => {
+                child.style.color = "#fff";
+                console.log(child.style);
+              });
+            });
+            console.log("yes");
+          } else {
+            Array.from(parentNode.children[1].children).forEach(elem => {
+              Array.from(elem.children).forEach(child => {
+                child.style.color = "black";
+                console.log(child.style);
+              });
+            });
+          }
         } else {
           color.textContent = "";
         }
       });
     }
-
-    console.log(allTarget, e.target);
+    _options.classList.remove("open");
+    // console.log(allTarget, e.target);
   };
   //close options button
   _close.onclick = function() {
@@ -123,6 +151,7 @@ function createOptions(wrapper) {
 
 function buildNoteElement(wrapper) {
   var _container = document.createElement("div");
+  _container.style.backgroundColor = "#fff2ab";
   var _header = document.createElement("div");
   var _plus = document.createElement("div");
   _plus.className = "plus";

@@ -7,7 +7,6 @@
     /* max-width: 228px; */
     display: inline-flex;
     flex-direction: column;
-    background-color: #fff2ab;
     box-shadow: 2px 2px 4px #4b4b4e66;
 }
 .header{
@@ -77,27 +76,7 @@ textarea{
     height: 50px;
     flex: 1;
 }
-.yellow{
-    background-color:  yellow;
-}
-.green{
-    background-color:  lightgreen;
-}
-.pink{
-    background-color:  pink;
-}
-.purple{
-    background-color:  #e8bce8f7;
-}
-.cyan{
-    background-color:  #b0f5f5;
-}
-.gray{
-    background-color:  #e2dfdf;
-}
-.black{
-    background-color: #36454f;
-}
+
 .more{
     background-color: #fff;
     padding: 20px;
